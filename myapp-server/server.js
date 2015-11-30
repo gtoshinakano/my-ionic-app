@@ -26,6 +26,7 @@ server.get('/testGET', function(req, res){
 
 });
 
+// Envia informações de Array para View
 server.get('/getREST', function(req, res){
 
   var rest = ["GET /api/post - Lists all posts", "POST /api/post - Creates a new Post",
@@ -36,6 +37,24 @@ server.get('/getREST', function(req, res){
 
 });
 
+/*
+ * Envia eventos de datas
+ */
+ server.get('/getCalendarEvents/:month', function(req, res){
+
+   var monthToGet = (parseInt(req.params.month)) ? parseInt(req.params.month) : new Date().getMonth();
+   var calendarEvents = ["nada"];
+   console.log(req.params.month);
+   if(req.params.month == 10){
+     calendarEvents = [
+                          {type : "hokkaido", data: new Date('2015-11-30'), title: "Bingo : 8h"},
+                          {type : "higuma", data: new Date('2015-11-26'), title: "Reunião : 20h"},
+                          {type : "hokkaido", data: new Date('2015-11-20'), title: "Reunião Diretoria : 20h"}
+                        ] ;
+  }
+  res.send(calendarEvents);
+
+ });
 server.listen(8080, function() {
   console.log('%s listening at %s', server.name, server.url);
 });

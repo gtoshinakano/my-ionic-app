@@ -41,7 +41,7 @@ angular.module('starter.controllers', [])
 
   // Diretiva para calendário
 
-  .directive("calendar", function() {
+  .directive("calendar", ['$http', 'production', function($http, production) {
       return {
           restrict: "E",
           templateUrl: "templates/tpl-calendar.html",
@@ -56,7 +56,7 @@ angular.module('starter.controllers', [])
               start.date(1);
               _removeTime(start.day(0));
 
-              _buildMonth(scope, start, scope.month);
+              _buildMonth(scope, start, scope.month, _getEventsData(scope.month));
 
               scope.select = function(day) {
                   scope.selected = day.date;
@@ -66,14 +66,14 @@ angular.module('starter.controllers', [])
                   var next = scope.month.clone();
                   _removeTime(next.month(next.month()+1).date(1));
                   scope.month.month(scope.month.month()+1);
-                  _buildMonth(scope, next, scope.month);
+                  _buildMonth(scope, next, scope.month, _getEventsData(scope.month));
               };
 
               scope.previous = function() {
                   var previous = scope.month.clone();
                   _removeTime(previous.month(previous.month()-1).date(1));
                   scope.month.month(scope.month.month()-1);
-                  _buildMonth(scope, previous, scope.month);
+                  _buildMonth(scope, previous, scope.month, _getEventsData(scope.month));
               };
           }
       };
@@ -82,33 +82,63 @@ angular.module('starter.controllers', [])
           return date.day(0).hour(0).minute(0).second(0).millisecond(0);
       }
 
-      function _buildMonth(scope, start, month) {
+      function _buildMonth(scope, start, month, eventsData) {
           scope.weeks = [];
           var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
           while (!done) {
-              scope.weeks.push({ days: _buildWeek(date.clone(), month) });
+              scope.weeks.push({ days: _buildWeek(date.clone(), month, eventsData) });
               date.add(1, "w");
               done = count++ > 2 && monthIndex !== date.month();
               monthIndex = date.month();
           }
       }
 
-      function _buildWeek(date, month) {
+      function _getEventsData(month){
+
+          //alert(month.month());
+          $http.get(production.url + '/getCalendarEvents/' + month.month()).then(function(resp) {
+            alert(resp.data);
+            return resp.data;
+          }, function(err) {
+            return err;
+            console.error('ERR', err);
+            // err.status will contain the status code
+          });
+
+      }
+
+      function _buildWeek(date, month, eventsData) {
           var days = [];
+          alert(eventsData);
           for (var i = 0; i < 7; i++) {
               days.push({
                   name: date.format("dd").substring(0, 1),
                   number: date.date(),
                   isCurrentMonth: date.month() === month.month(),
                   isToday: date.isSame(new Date(), "day"),
-                  date: date
+                  date: date,
+                  //'event': _findEvents(date, eventsData),
+                  hasEvent : true
               });
               date = date.clone();
               date.add(1, "d");
           }
           return days;
       }
-  })
+
+      /*function _findEvents(actual_date, eventsData){
+
+        alert(eventsData);
+        for (var i = 0; i < eventsData.length; i++){
+
+          alert(eventsData[i].data);
+
+        }
+        return true;
+
+      }*/
+
+  }])
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called

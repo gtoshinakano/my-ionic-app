@@ -98,8 +98,13 @@ calendar > div.week > span.day.different-month {
 calendar > div.week > span.day.selected {
   background: #2875C7;
   color: white;
+  font-weight: bold;
 }
 calendar > div.week.names > span {
   color: #2875C7;
   font-weight: bold;
+}
+calendar > div.week > span.day.hasEvent {
+  background: #FA8C19;
+  color: white;
 }
