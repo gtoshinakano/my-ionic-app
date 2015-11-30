@@ -1,0 +1,14 @@
+{
+  "name": "myapp-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server"
+  },
+  "author": "gtoshinakano",
+  "license": "MIT",
+  "dependencies": {
+    "restify": "^4.0.3"
+  }
+}

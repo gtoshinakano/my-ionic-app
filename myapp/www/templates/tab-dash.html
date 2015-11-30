@@ -1,0 +1,30 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="padding">
+
+    <div class="list card">
+      <div class="item item-divider">Upcoming</div>
+      <div class="item item-body">
+        <div>
+          You have <b>29</b> meetings on your calendar tomorrow.
+        </div>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">Testing Server</div>
+      <div class="item item-body">
+        <div>
+          Sending testGET on : <b>http://localhost:8080/testGET</b><br />
+          {{server_response}}
+        </div>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">RESTful API Methods</div>
+      <div class="item item-body">
+        <div>
+          <p ng-repeat="arr in methods">{{arr}}</p>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
