@@ -1,0 +1,40 @@
+<ion-view view-title="Contatos">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="contato in contatos" type="item-text-wrap">
+        <img ng-src="{{contato.image}}" />
+        <h2>{{contato.telefone + " - " + contato.operadora.nome}}</h2>
+        <p>{{contato.nome}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="remove(contato)">
+          Apagar
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+    <div class="list card">
+      <div class="item item-divider"><i class="icon ion-android-person" ng-class="{'ion-android-person-add': contato.nome != ''}"> Novo Contato</i></div>
+      <div class="item item-body">
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="Nome" ng-model="contato.nome">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Telefone" ng-model="contato.telefone">
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Operadora
+            </div>
+            <select ng-model="contato.operadora" ng-options="operadora.codigo as operadora.nome group by operadora.categoria for operadora in operadoras">
+              <option value="">Selecione</option>
+            </select>
+          </label>
+          <button class="button button-block button-positive" ng-click="cadastraContato(contato)" ng-disabled="!contato.nome || ! contato.telefone">
+            Cadastrar Novo Contato
+          </button>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

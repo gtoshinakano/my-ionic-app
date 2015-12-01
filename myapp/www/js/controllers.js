@@ -31,6 +31,50 @@ angular.module('starter.controllers', [])
 })
 
 /*
+ * Contatos Video Youtube
+ */
+.controller('ContatosCtrl', function($scope) {
+
+  $scope.contatos = [
+    {nome: 'Toshi', telefone: "959999994", image: "img/toshi.gif"},
+    {nome: 'Fu', telefone: "994999952", image: "img/fu.gif"},
+    {nome: 'Gui', telefone: "959454894", image: "img/gui.gif"}
+  ];
+  $scope.contato = {};
+  $scope.operadoras = [
+    {nome: "Oi", codigo: "14", categoria: "celular"},
+    {nome: "Vivo", codigo: "15", categoria: "celular"},
+    {nome: "Tim", codigo: "41", categoria: "celular"},
+    {nome: "Embratel", codigo: "21", categoria: "Fixo"}
+  ];
+  $scope.cadastraContato = function(contato){
+    contato.image = 'img/default.gif';
+    $scope.contatos.push(angular.copy(contato));
+    delete $scope.contato;
+  }
+  $scope.remove = function(contato){
+    var index = $scope.contatos.indexOf(contato);
+    $scope.contatos.splice(index, 1); // Remove pelo índice pego acima TODO Backend Remove
+  }
+
+
+  function dump(obj) {
+      var out = '';
+      for (var i in obj) {
+          out += i + ": " + obj[i] + "\n";
+      }
+
+      alert(out);
+
+      // or, if you wanted to avoid alerts...
+
+      var pre = document.createElement('pre');
+      pre.innerHTML = out;
+      document.body.appendChild(pre)
+  }
+})
+
+/*
  * Calendário
  */
 .controller('CalendarCtrl', function($scope) {

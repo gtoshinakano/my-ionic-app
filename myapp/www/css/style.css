@@ -14,7 +14,7 @@ calendar {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   background: white;
-  width: 300px;
+  width: 100%;
   border: solid 1px #CCC;
   margin-bottom: 10px;
 }
@@ -107,4 +107,41 @@ calendar > div.week.names > span {
 calendar > div.week > span.day.hasEvent {
   background: #FA8C19;
   color: white;
+}
+
+.bg-primary {
+  color: #fff;
+  background-color: #337ab7;
+}
+a.bg-primary:hover,
+a.bg-primary:focus {
+  background-color: #286090;
+}
+.bg-success {
+  background-color: #dff0d8;
+}
+a.bg-success:hover,
+a.bg-success:focus {
+  background-color: #c1e2b3;
+}
+.bg-info {
+  background-color: #d9edf7;
+}
+a.bg-info:hover,
+a.bg-info:focus {
+  background-color: #afd9ee;
+}
+.bg-warning {
+  background-color: #fcf8e3;
+}
+a.bg-warning:hover,
+a.bg-warning:focus {
+  background-color: #f7ecb5;
+}
+.bg-danger {
+  background-color: #f2dede;
+}
+a.bg-danger:hover,
+a.bg-danger:focus {
+  background-color: #e4b9b9;
 }
