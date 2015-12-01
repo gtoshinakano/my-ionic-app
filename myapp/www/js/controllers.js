@@ -97,7 +97,7 @@ angular.module('starter.controllers', [])
 
           //alert(month.month());
           $http.get(production.url + '/getCalendarEvents/' + month.month()).then(function(resp) {
-            alert(resp.data);
+            //alert(resp.data);
             return resp.data;
           }, function(err) {
             return err;
@@ -109,7 +109,7 @@ angular.module('starter.controllers', [])
 
       function _buildWeek(date, month, eventsData) {
           var days = [];
-          alert(eventsData);
+          //alert(eventsData);
           for (var i = 0; i < 7; i++) {
               days.push({
                   name: date.format("dd").substring(0, 1),
@@ -118,7 +118,7 @@ angular.module('starter.controllers', [])
                   isToday: date.isSame(new Date(), "day"),
                   date: date,
                   //'event': _findEvents(date, eventsData),
-                  hasEvent : true
+                  //hasEvent : true
               });
               date = date.clone();
               date.add(1, "d");
